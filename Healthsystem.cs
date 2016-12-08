@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class Healthsystem : MonoBehaviour {
     public float health;
     public float curhealth;
-    Slider healthbar;
     public bool alive;
 
 
@@ -14,13 +13,7 @@ public class Healthsystem : MonoBehaviour {
         health = 100;
         curhealth = health;
         alive = true;
-        healthbar.value = curhealth;
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
+        
 	
 	}
    public void TakeDamage(float amount)
@@ -34,10 +27,11 @@ public class Healthsystem : MonoBehaviour {
             curhealth = 0;
             alive = false;
             gameObject.SetActive(false);
-            healthbar.gameObject.SetActive(false);
+           
         }
         curhealth -= amount;
-        healthbar.value = curhealth;
+        GameObject.FindObjectOfType<healthbar>().TakeDamage();
+        
     }
    public void Healing(float healing)
     {
@@ -45,6 +39,6 @@ public class Healthsystem : MonoBehaviour {
         {
             curhealth += healing;
         }
-        healthbar.value = curhealth;
+        
     }
 }
